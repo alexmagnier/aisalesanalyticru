@@ -25,22 +25,22 @@ const HomePage: React.FC = () => {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black leading-tight mb-6">
-            <span className="text-white">Прекратите тратить </span>
-            <span className="gradient-text">5 часов в день</span>
-            <br />
-            <span className="text-white">на прослушивание звонков</span>
+            <span className="text-white">Хватит терять деньги на </span>
+            <span className="gradient-text">слитых звонках</span>
           </h1>
 
           <p className="text-xl sm:text-2xl text-slate-400 max-w-3xl mx-auto mb-8 leading-relaxed">
-            AI-платформа анализирует <span className="text-white font-semibold">100% звонков</span> вашего отдела продаж, 
-            выявляет слабые места и даёт <span className="text-emerald-400 font-semibold">персонализированные рекомендации</span> на основе ваших скриптов
+            AI-платформа аналитики проверяет <span className="text-white font-semibold">100% звонков</span> и показывает, 
+            где менеджер потерял клиента, выявляет слабые места и дает <span className="text-emerald-400 font-semibold">персонализированные рекомендации</span> на основе ваших скриптов и информации о продукте
           </p>
 
-          <div className="flex flex-wrap justify-center gap-6 sm:gap-10 mb-10">
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-10">
             {[
               { value: '100%', label: 'звонков под контролем' },
-              { value: '5×', label: 'быстрее обучение' },
+              { value: '+20%', label: 'рост конверсии' },
+              { value: '1500%+', label: 'ROI' },
               { value: '15 мин', label: 'на настройку' },
+              { value: '×5', label: 'быстрее обучение менеджеров' },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <div className="text-3xl sm:text-4xl font-black gradient-text">{stat.value}</div>
