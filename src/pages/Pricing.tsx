@@ -8,7 +8,7 @@ const PricingPage: React.FC = () => {
     { name: 'Старт', price: 6900, description: 'Для небольших команд', quick: 1500, deep: 150, managers: 3, projects: 2 },
     { name: 'Команда', price: 14900, description: 'Оптимальный выбор', quick: 4000, deep: 500, managers: 10, projects: 5, popular: true },
     { name: 'Бизнес', price: 39900, description: 'Для растущих компаний', quick: 10000, deep: 1500, managers: 20, projects: 10 },
-    { name: 'Корпоративный', price: 79900, description: 'Для крупного бизнеса', quick: 30000, deep: 5000, managers: 50, projects: 20 },
+    { name: 'Корпоративный', price: 94900, description: 'Для крупного бизнеса', quick: 20000, deep: 5000, managers: 50, projects: 20 },
   ];
 
   return (
