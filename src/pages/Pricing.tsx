@@ -94,10 +94,19 @@ const PricingPage: React.FC = () => {
                 <Zap className="w-5 h-5 text-blue-400" />Quick-минуты
               </h3>
               <div className="space-y-2 text-sm">
-                {[{ m: '500', p: '1 750' }, { m: '2 000', p: '7 000' }, { m: '5 000', p: '17 500' }].map((p, i) => (
-                  <div key={i} className="flex justify-between p-3 rounded-lg bg-slate-900/50">
+                {[
+                  { m: '500', p: '2 000', discount: '-12%' }, 
+                  { m: '2 000', p: '7 000' }, 
+                  { m: '5 000', p: '15 000', discount: '-25%' }
+                ].map((p, i) => (
+                  <div key={i} className="flex justify-between items-center p-3 rounded-lg bg-slate-900/50">
                     <span>{p.m} мин</span>
-                    <span className="text-blue-400 font-medium">{p.p} ₽</span>
+                    <div className="flex flex-col items-end">
+                      <span className="text-blue-400 font-medium">{p.p} ₽</span>
+                      {p.discount && (
+                        <span className="text-xs text-emerald-400 font-medium">{p.discount}</span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -107,10 +116,26 @@ const PricingPage: React.FC = () => {
                 <Brain className="w-5 h-5 text-emerald-400" />Deep-минуты
               </h3>
               <div className="space-y-2 text-sm">
-                {[{ m: '100', p: '800' }, { m: '500', p: '4 000' }, { m: '1 000', p: '8 000' }].map((p, i) => (
-                  <div key={i} className="flex justify-between p-3 rounded-lg bg-slate-900/50">
+                {[
+                  { m: '100', p: '900' }, 
+                  { m: '500', p: '4 000', discount: '-11%' }, 
+                  { m: '1 000', p: '7 000', discount: '-22%', popular: true }
+                ].map((p, i) => (
+                  <div key={i} className={`relative flex justify-between items-center p-3 rounded-lg ${
+                    p.popular ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-slate-900/50'
+                  }`}>
+                    {p.popular && (
+                      <div className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-emerald-500 text-xs font-bold flex items-center gap-1">
+                        ⭐ Популярный
+                      </div>
+                    )}
                     <span>{p.m} мин</span>
-                    <span className="text-emerald-400 font-medium">{p.p} ₽</span>
+                    <div className="flex flex-col items-end">
+                      <span className="text-emerald-400 font-medium">{p.p} ₽</span>
+                      {p.discount && (
+                        <span className="text-xs text-emerald-400 font-medium">{p.discount}</span>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>

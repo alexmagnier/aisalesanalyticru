@@ -728,13 +728,18 @@ const ExtraMinutesSection: React.FC = () => {
             </div>
             <div className="space-y-3">
               {[
-                { m: 500, p: 1750 },
+                { m: 500, p: 2000, discount: '-12%' },
                 { m: 2000, p: 7000 },
-                { m: 5000, p: 17500 }
+                { m: 5000, p: 15000, discount: '-25%' }
               ].map((pack, i) => (
                 <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-slate-900/50">
                   <span className="font-medium">{pack.m.toLocaleString()} мин</span>
-                  <span className="text-blue-400 font-bold">{pack.p.toLocaleString()} ₽</span>
+                  <div className="flex flex-col items-end">
+                    <span className="text-blue-400 font-bold">{pack.p.toLocaleString()} ₽</span>
+                    {pack.discount && (
+                      <span className="text-xs text-emerald-400 font-medium">{pack.discount}</span>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -748,13 +753,25 @@ const ExtraMinutesSection: React.FC = () => {
             </div>
             <div className="space-y-3">
               {[
-                { m: 100, p: 800 },
-                { m: 500, p: 4000 },
-                { m: 1000, p: 8000 }
+                { m: 100, p: 900 },
+                { m: 500, p: 4000, discount: '-11%' },
+                { m: 1000, p: 7000, discount: '-22%', popular: true }
               ].map((pack, i) => (
-                <div key={i} className="flex items-center justify-between p-4 rounded-xl bg-slate-900/50">
+                <div key={i} className={`relative flex items-center justify-between p-4 rounded-xl ${
+                  pack.popular ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-slate-900/50'
+                }`}>
+                  {pack.popular && (
+                    <div className="absolute -top-2 -right-2 px-2 py-0.5 rounded-full bg-emerald-500 text-xs font-bold flex items-center gap-1">
+                      ⭐ Популярный
+                    </div>
+                  )}
                   <span className="font-medium">{pack.m.toLocaleString()} мин</span>
-                  <span className="text-emerald-400 font-bold">{pack.p.toLocaleString()} ₽</span>
+                  <div className="flex flex-col items-end">
+                    <span className="text-emerald-400 font-bold">{pack.p.toLocaleString()} ₽</span>
+                    {pack.discount && (
+                      <span className="text-xs text-emerald-400 font-medium">{pack.discount}</span>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
