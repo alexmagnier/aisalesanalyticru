@@ -25,6 +25,7 @@ const Navigation: React.FC = () => {
     { path: '/for-whom', label: 'Для кого' },
     { path: '/calculator', label: 'Калькулятор ROI' },
     { path: '/blog', label: 'Блог' },
+    { path: '/partners', label: 'Партнёрам' },
   ];
 
   const isActive = (path: string) => location.pathname === path;
