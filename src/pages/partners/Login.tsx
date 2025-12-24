@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { ArrowLeft, Loader2, Sparkles, Eye, EyeOff } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -11,15 +11,34 @@ import { useToast } from '@/hooks/use-toast';
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { signIn } = useAuth();
+  const { signIn, user, partner, loading: authLoading } = useAuth();
   const { toast } = useToast();
   
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loginSuccessful, setLoginSuccessful] = useState(false);
 
   const from = (location.state as { from?: { pathname: string } })?.from?.pathname || '/partners/dashboard';
+
+  // Редирект если уже авторизован
+  useEffect(() => {
+    if (!authLoading && user && partner) {
+      navigate(from, { replace: true });
+    }
+  }, [authLoading, user, partner, navigate, from]);
+
+  // После успешного логина ждём загрузки partner и редиректим
+  useEffect(() => {
+    if (loginSuccessful && partner) {
+      toast({
+        title: 'Добро пожаловать!',
+        description: 'Вы успешно вошли в кабинет',
+      });
+      navigate(from, { replace: true });
+    }
+  }, [loginSuccessful, partner, navigate, from, toast]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,9 +56,8 @@ const Login = () => {
 
     const { error } = await signIn(email, password);
 
-    setLoading(false);
-
     if (error) {
+      setLoading(false);
       toast({
         title: 'Ошибка входа',
         description: error.message === 'Invalid login credentials' 
@@ -50,12 +68,8 @@ const Login = () => {
       return;
     }
 
-    toast({
-      title: 'Добро пожаловать!',
-      description: 'Вы успешно вошли в кабинет',
-    });
-
-    navigate(from, { replace: true });
+    // Успешный логин - ждём загрузки partner через useEffect
+    setLoginSuccessful(true);
   };
 
   return (
