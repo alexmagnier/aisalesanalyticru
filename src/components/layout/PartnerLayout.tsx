@@ -7,7 +7,8 @@ import {
   User, 
   LogOut,
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Shield
 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -42,7 +43,7 @@ const navigation = [
 const PartnerLayout = ({ children }: PartnerLayoutProps) => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { partner, signOut } = useAuth();
+  const { partner, isAdmin, signOut } = useAuth();
 
   const handleSignOut = async () => {
     await signOut();
@@ -110,6 +111,18 @@ const PartnerLayout = ({ children }: PartnerLayoutProps) => {
                 </Link>
               );
             })}
+            
+            {/* Admin Panel Link - только для админов */}
+            {isAdmin && (
+              <Link
+                to="/admin/dashboard"
+                className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 mt-4"
+              >
+                <Shield className="w-5 h-5" />
+                Админ-панель
+                <ChevronRight className="w-4 h-4 ml-auto" />
+              </Link>
+            )}
           </nav>
 
           {/* Balance card */}
